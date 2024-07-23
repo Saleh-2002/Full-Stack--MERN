@@ -16,8 +16,8 @@ app.listen(Port, () => {
 });
 
 let Users = [
-    { email: "salehssag40@gmail.com", password: "Saleh2002" },
-    { email: "farisalduraibi@gmail.com", password: "Faris2004" }
+    { email: "User1", password: "1234" },
+    { email: "User2", password: "1234" }
 ];
 let MyPosts = [];
 let MyName = null;
