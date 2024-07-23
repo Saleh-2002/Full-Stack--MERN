@@ -1,0 +1,70 @@
+<%- include("partials/header.ejs") %>
+
+    <style>
+        .title {
+            margin-top: 70px;
+            color: papayawhip;
+            font-family: cursive;
+            text-shadow: 2px 2px 25px #ca3c5f;
+            font-size: 3rem;
+        }
+
+        .TextBox {
+            width: 300px;
+            background-color: inherit;
+            border-radius: 20px;
+            border: solid rgb(181, 8, 175) 2px;
+            color: antiquewhite;
+        }
+
+        .Button2 {
+            margin-top: 10px;
+            width: 145px;
+            background-color: rgb(181, 8, 175);
+            border-radius: 12px;
+            border: solid rgb(181, 8, 175) 2px;
+            color: bisque;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .Button2:hover {
+            box-shadow: 0 0 10px rgb(101, 0, 105), inset 1px 1px 10px rgb(216, 163, 218), 0 0 15px 1px rgb(168, 5, 173);
+        }
+
+        body {
+            background-color: #2f243a !important;
+        }
+
+        footer {
+            color: wheat;
+            font-family: fantasy;
+        }
+        .Grid-Container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+    </style>
+    <div align="center">
+        <div class="Post" style="width: 18rem;">
+            <form action="/update/<%= PostID %>?_method=PUT" method="POST">
+                <div>
+                    <label for="Topic" style="color: antiquewhite;">Edited Topic</label>
+                    <input class="TextBox" type="text" name="Topic" id="Topic" value="<%= Post.Topic %>"
+                        style="border-radius: 12px;" required>
+                </div>
+                <div>
+                    <label for="Discription" style="color: antiquewhite;" >Edited Discription</label>
+                    <input class="TextBox" type="text" name="Discription" id="Discription"
+                        value="<%= Post.Discription %>" style="height: 300px; " required>
+                </div>
+                <div>
+                    <div class="Grid-Container">
+                        <button class="Button2" type="submit">Save</button>
+                        <a href="/main"><Button class="Button2" style="background-color: inherit;">Cancel</Button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include("partials/footer.ejs") %>

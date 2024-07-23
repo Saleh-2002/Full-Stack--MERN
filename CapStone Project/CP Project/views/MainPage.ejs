@@ -1,0 +1,43 @@
+<%- include("partials/header.ejs") %>
+<h5 style="color: chocolate;">Hello <%= MyName %></h5>
+<div align="center">
+    <div class="Post" style="width: 18rem;">
+        <form action="/Poster" method="POST">
+            <div>
+                <label class="LabelForPost" style="color: antiquewhite;">Write the Topic Here</label>
+                <input class="TextBox" type="text" name="Topic" id="Topic" style="border-radius: 12px;" required>
+            </div>
+            <div>
+                <label class="LabelForPost"  style="color: antiquewhite;">Write Here Your Thoughts</label>
+                <input class="TextBox" type="text" name="Discription" id="Discription" style="height: 300px;" required>
+            </div>
+            <div>
+                <button class="Button2" type="submit">Post!</button>
+            </div>
+        </form>
+    </div>
+    <h2 style="margin-top: 90px; background-color: blanchedalmond; width: 600px; border-radius: 30px;">Latest Posts</h2>
+
+    <div class="PostBox">
+        <% if(MyPosts.length > 0) { %>
+            <% for(let i = 0; i < MyPosts.length; i++) { %>
+                <h6 style="text-align: left; margin-left: 15px; color: bisque;"><%= MyName %></h6>
+                <div class="Post">
+                    <h3 style="color: blanchedalmond !important;"><%= MyPosts[i].Topic %></h3>
+                    <p style="color: blanchedalmond !important;"><%= MyPosts[i].Discription %></p>
+                    <!------Delete And Update ------->
+                    <a href="/update/<%= i %>"><button class="EditButton" data-method="PUT" onclick="handleButtonClick(event)">Edit post</button></a>
+                    <form action="/update/<%= i %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button class="DeleteButton" data-method="DELETE" onclick="handleButtonClick(event)" type="submit">Delete Post</button>
+                    </form>
+                    <br><hr>
+                </div>
+            <% } %>
+        <% } else { %>
+            <h4><%= "No Posts Yet!" %></h4>
+        <% } %>
+    </div>
+</div>
+
+<script src="Scripts/Script.js"></script>
+<%- include("partials/footer.ejs") %>
