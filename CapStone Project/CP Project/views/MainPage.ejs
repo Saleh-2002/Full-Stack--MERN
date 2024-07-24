@@ -1,5 +1,5 @@
 <%- include("partials/header.ejs") %>
-<h5 style="color: chocolate;">Hello <%= MyName %></h5>
+<h5 style="color: chocolate;">Hello <%= //MyName %></h5>
 <div align="center">
     <div class="Post" style="width: 18rem;">
         <form action="/Poster" method="POST">
@@ -16,7 +16,6 @@
             </div>
         </form>
     </div>
-    <h2 style="margin-top: 90px; background-color: blanchedalmond; width: 600px; border-radius: 30px;">Latest Posts</h2>
 
     <div class="PostBox">
         <% if(MyPosts.length > 0) { %>

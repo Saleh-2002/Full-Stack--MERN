@@ -8,17 +8,15 @@
                     <form action="/Login" method="POST">
                         <h1 class="title">Cap Stone</h1>
                         <div>
-                            <input class="name" type="text" name="Name" placeholder="Full Name" required>
+                            <input class="name" type="text" name="email" placeholder="Email">
                         </div>
                         <div>
-                            <input class="name" type="text" name="email" placeholder="Email" required>
+                            <input class="password" type="text" name="password" placeholder="Password">
                         </div>
-                        <div>
-                            <input class="password" type="text" name="password" placeholder="Password" required>
-                        </div>
-                        <button class="sub" type="Login">Log In</button>
+                                <button class="sub" type="Login">Log In</button>
                     </form>
-
-        </div>
+                    <a href="/SignUp"><button class="sub" type="SignUp"
+                            style="background-color: rgb(181, 8, 175) !important;">Sign Up</button></a>
+    </div>
     </div>
     <%- include("partials/footer.ejs") %>

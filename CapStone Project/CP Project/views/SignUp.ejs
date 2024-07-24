@@ -1,0 +1,27 @@
+<%- include("partials/header.ejs") %>
+    <div align="center">
+
+        <div class="Styling" style="height: 600px;">
+            <h1 class="title">Cap Stone</h1>
+
+            <% if(error) {%>
+                <h6 class="error"><%=error%></h6>
+                <% } %>
+                    <form action="/SignUp" method="POST">
+                        <div>
+                            <input class="name" type="text" name="Name" placeholder="Full Name" >
+                        </div>
+                        <div>
+                            <input class="name" type="text" name="email" placeholder="Email" >
+                        </div>
+                        <div>
+                            <input class="password" type="text" name="password" placeholder="Password" >
+                        </div>
+                        <div>
+                            <input class="password" type="date" name="BirthDay" placeholder="Your BirthDay">
+                        </div>
+                        <button class="sub" type="Sign Up" style="background-color: rgb(181, 8, 175) !important;">Sign
+                            Up</button>
+                    </form>
+        </div>
+        <%- include("partials/footer.ejs") %>
