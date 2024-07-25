@@ -29,7 +29,7 @@ app.post("/Login", (req, res) => {
     for (let i = 0; i < Users.length; i++) {
         if (email.toLowerCase() === Users[i].email.toLowerCase() && password === Users[i].password) {
             UserFound = true;
-            MyName = Users.Name;
+            MyName = Users[i].Name;
             res.redirect("/main");
             break;
         }
