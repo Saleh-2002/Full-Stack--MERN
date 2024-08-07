@@ -1,21 +1,22 @@
 <%- include("partials/header.ejs") %>
+<h6 style="color: bisque;"> Welcome <%= MyName %> !</h6>
 <div align="center">
     <div class="Post" style="width: 18rem;">
         <form action="/Poster" method="POST">
             <div>
                 <label class="LabelForPost" style="color: antiquewhite;">Write the Topic Here</label>
-                <input class="TextBox" type="text" name="Topic" id="Topic" style="border-radius: 12px;" required>
+                <input class="TextBox" type="text" name="Topic" id="Topic" style="border-radius: 12px;" >
             </div>
             <div>
                 <label class="LabelForPost"  style="color: antiquewhite;">Write Here Your Thoughts</label>
-                <input class="TextBox" type="text" name="Discription" id="Discription" style="height: 300px;" required>
+                <input class="TextBox" type="text" name="Discription" id="Discription" style="height: 300px;" >
             </div>
             <div>
                 <button class="Button2" type="submit">Post!</button>
             </div>
         </form>
     </div>
-
+    <h6 style="background-color: red; border-radius: 20px; width: 600px; margin-top: 10px;"><%= error2 %></h6>
     <div class="PostBox">
         <% if(MyPosts.length > 0) { %>
             <% for(let i = 0; i < MyPosts.length; i++) { %>
@@ -23,10 +24,11 @@
                 <div class="Post">
                     <h3 style="color: blanchedalmond !important;"><%= MyPosts[i].Topic %></h3>
                     <p style="color: blanchedalmond !important;"><%= MyPosts[i].Discription %></p>
-                    <!------Delete And Update ------->
-                    <a href="/update/<%= i %>"><button class="EditButton" data-method="PUT" onclick="handleButtonClick(event)">Edit post</button></a>
+                    <!------ Update And Delete ------->
+                    <a href="/update/<%= i %>"><button class="EditButton" data-method="PUT" >Edit post</button></a>
                     <form action="/update/<%= i %>?_method=DELETE" method="POST" style="display:inline;">
                         <button class="DeleteButton" data-method="DELETE" onclick="handleButtonClick(event)" type="submit">Delete Post</button>
+                        
                     </form>
                     <br><hr>
                 </div>
@@ -36,6 +38,4 @@
         <% } %>
     </div>
 </div>
-
-<script src="Scripts/Script.js"></script>
 <%- include("partials/footer.ejs") %>

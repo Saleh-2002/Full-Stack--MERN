@@ -5,17 +5,19 @@
             <h1 class="title">Cap Stone</h1>
 
             <% if(error) {%>
-                <h6 class="error"><%=error%></h6>
+                <h6 class="error">
+                    <%=error%>
+                </h6>
                 <% } %>
                     <form action="/SignUp" method="POST">
                         <div>
-                            <input class="name" type="text" name="Name" placeholder="Full Name" >
+                            <input class="name" type="text" name="Name" placeholder="Full Name">
                         </div>
                         <div>
-                            <input class="name" type="text" name="email" placeholder="Email" >
+                            <input class="name" type="text" name="email" placeholder="Email">
                         </div>
                         <div>
-                            <input class="password" type="text" name="password" placeholder="Password" >
+                            <input class="password" type="text" name="password" placeholder="Password">
                         </div>
                         <div>
                             <input class="password" type="date" name="BirthDay" placeholder="Your BirthDay">

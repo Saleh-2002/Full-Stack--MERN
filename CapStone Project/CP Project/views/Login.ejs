@@ -3,20 +3,22 @@
     <div align="center">
         <div class="Styling">
             <% if(error) {%>
-                <h6 class="error">Invalid email or password.</h6>
-                <% } %>
-                    <form action="/Login" method="POST">
-                        <h1 class="title">Cap Stone</h1>
-                        <div>
-                            <input class="name" type="text" name="email" placeholder="Email">
-                        </div>
-                        <div>
-                            <input class="password" type="text" name="password" placeholder="Password">
-                        </div>
-                                <button class="sub" type="Login">Log In</button>
-                    </form>
-                    <a href="/SignUp"><button class="sub" type="SignUp"
-                            style="background-color: rgb(181, 8, 175) !important;">Sign Up</button></a>
-    </div>
+                <h6 class="error"><%= error %></h6>
+                <% }else if (Success){ %>
+                    <h6 class="Success"><%= Success %></h6>
+                    <% } %>
+                        <form action="/Login" method="POST">
+                            <h1 class="title">Cap Stone</h1>
+                            <div>
+                                <input class="name" type="text" name="email" placeholder="Email">
+                            </div>
+                            <div>
+                                <input class="password" type="text" name="password" placeholder="Password">
+                            </div>
+                            <button class="Login" type="Login">Log In</button>
+                        </form>
+                        <a href="/SignUp"><button class="sub" type="SignUp"
+                                style="background-color: rgb(181, 8, 175) !important;">Sign Up</button></a>
+        </div>
     </div>
     <%- include("partials/footer.ejs") %>

@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import bcrypt from "bcrypt"
 import methodOverride from "method-override";
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 const Port = 3000;
+const Rounds = 10;
 
 app.listen(Port, () => {
     console.log(`Running on Port ${Port}`);
@@ -20,44 +22,69 @@ let MyPosts = [];
 let MyName = null;
 
 app.get("/", (req, res) => {
-    res.render("Login", { error: null });
+    try {
+        res.render("Login", { Success: null, error: null, MyName }); // Pass MyName if needed
+    } catch (err) {
+        res.render("/", { error: err })
+    }
 });
 
+
 app.post("/Login", (req, res) => {
-    let UserFound = false;
-    const { Name, email, password } = req.body;
-    for (let i = 0; i < Users.length; i++) {
-        if (email.toLowerCase() === Users[i].email.toLowerCase() && password === Users[i].password) {
-            UserFound = true;
-            MyName = Users[i].Name;
-            res.redirect("/main");
-            break;
+    try {
+        let UserFound = false;
+        const { Name, email, password } = req.body;
+        for (let i = 0; i < Users.length; i++) {
+            if (email.toLowerCase() === Users[i].email.toLowerCase() && password === Users[i].password) {
+                UserFound = true;
+                MyName = Users[i].Name;
+                res.redirect("/main");
+                break;
+            }
         }
-    }
-    if (!UserFound) {
-        res.render("Login", { error: "Invalid Email or Password!" });
+        if (!UserFound) {
+            res.render("Login", { error: "Invalid Email or Password!" });
+        }
+    } catch (error) {
+        res.render("Login", { error: err });
     }
 });
 
 app.get("/SignUp", (req, res) => {
-    res.render("SignUp", { error: null });
-})
-
-app.post("/SignUp", (req, res) => {
     try {
-        const { Name, email, password, BirthDay } = req.body;
-        if (Name && email && password && BirthDay) {
-            Users.push({ Name, email, password, BirthDay });
-            res.redirect("/");
-        } else if (Name == null || email == null || password == null || BirthDay == null) {
-            res.render("SignUp", { error: "Please Fill All Fields!" });
-        } else {
-            res.render("SignUp", { error: "Please Fill All Fields!" });
-        }
-    } catch (err) {
-        res.render("SignUp", { error: "Something Went Wrong!" });
+        res.render("SignUp", { error: null });
+
+    } catch (error) {
+        res.render("SignUp", { error: err });
     }
 })
+
+app.post("/SignUp", async (req, res) => {
+    try {
+        const { Name, email, password, BirthDay } = req.body;
+
+        if (!Name || !email || !password || !BirthDay) {
+            return res.render("SignUp", { error: "Please Fill All Fields!" });
+        }
+
+        if (Users.some(user => user.email.toLowerCase() === email.toLowerCase())) {
+            return res.render("SignUp", { Success: null, error: "User With This Email Already Exists!" });
+        }
+
+        const CyberPass = await bcrypt.hash(password, Rounds)
+        Users.push({ Name, email, password: CyberPass, BirthDay });
+        res.render("Login", { Success: "New User Was Added Successfully", error: null });
+
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        res.render("SignUp", { error: "An unexpected error occurred. Please try again later." });
+    }
+});
+
+
+app.get("/main", (req, res) => {
+    res.render("MainPage", { MyName, MyPosts, error2: null });
+});
 
 app.get('/update/:id', (req, res) => {
     const id = req.params.id;
@@ -72,12 +99,6 @@ app.put('/update/:id', (req, res) => {
     res.redirect("/main");
 });
 
-app.get("/main", (req, res) => {
-    res.render("MainPage", { MyName, MyPosts, error2: null });
-});
-
-
-
 app.post("/Poster", (req, res) => {
     const { Topic, Discription } = req.body;
     if (Topic && Discription) {
@@ -89,7 +110,12 @@ app.post("/Poster", (req, res) => {
 });
 
 app.delete('/update/:id', (req, res) => {
-    const id = req.params.id;
-    MyPosts.splice(id, 1);
-    res.redirect("/main");
+    try {
+        const id = req.params.id;
+        MyPosts.splice(id, 1);
+        res.redirect("/main");
+    }
+    catch (err) {
+        res.render("MainPage", { MyName, MyPosts, error2: err });
+    }
 });

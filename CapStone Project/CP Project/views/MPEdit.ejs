@@ -39,10 +39,16 @@
             color: wheat;
             font-family: fantasy;
         }
-        .Grid-Container{
+
+        .Grid-Container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
+        }
+        .titleSec {
+            color: papayawhip;
+            font-family: cursive;
+            text-shadow: 3px 1px 20px #ca3c5f;
         }
     </style>
     <div align="center">
@@ -54,17 +60,22 @@
                         style="border-radius: 12px;" required>
                 </div>
                 <div>
-                    <label for="Discription" style="color: antiquewhite;" >Edited Discription</label>
+                    <label for="Discription" style="color: antiquewhite;">Edited Discription</label>
                     <input class="TextBox" type="text" name="Discription" id="Discription"
                         value="<%= Post.Discription %>" style="height: 300px; " required>
                 </div>
                 <div>
                     <div class="Grid-Container">
-                        <button class="Button2" type="submit">Save</button>
-                        <a href="/main"><Button class="Button2" style="background-color: inherit;">Cancel</Button></a>
+                        <button class="Button2 Save" type="submit">Save</button>
+                        <a href="/main"><Button class="Button2 Cancel"
+                                style="background-color: inherit;">Cancel</Button></a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script>  
+        document.querySelectorAll('span')[0].innerHTML = "Cap Stone";
+        document.querySelectorAll('span')[0].classList.add('titleSec')
+    </script>
     <%- include("partials/footer.ejs") %>
