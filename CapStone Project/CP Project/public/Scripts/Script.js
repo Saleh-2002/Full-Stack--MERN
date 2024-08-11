@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('span')[0].innerHTML = "Welcome";
     } else if (window.location.pathname !== '/SignUp' && window.location.pathname !== '/Login') {
         document.querySelectorAll('span')[0].innerHTML = "Cap Stone";
+        document.querySelector(".LogOut").innerHTML = "<a href='/LogOut'>Logout</a>";
         document.querySelectorAll('span')[0].classList.add('titleSec')
     }
 });
